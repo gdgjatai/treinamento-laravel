@@ -21,6 +21,8 @@ class Cliente extends Model
         'email',
         'telefone',
         'inadimplente',
-        'pessoa'
+        'data_nasc',
+        'sexo',
+        'estado_civil'
     ];
 }

@@ -27,6 +27,7 @@ class ClienteController extends Controller
     public function create()
     {
         //
+        return view('cliente.create');
     }
 
     /**
@@ -38,6 +39,10 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         //
+        $cliente = $request->all();
+        $cliente['inadimplente'] = false;
+        Cliente::create($cliente);
+        return redirect()->route('clientes.index');
     }
 
     /**
@@ -60,6 +65,7 @@ class ClienteController extends Controller
     public function edit(Cliente $cliente)
     {
         //
+        return view('cliente.edit', compact('cliente'));
     }
 
     /**
@@ -72,6 +78,20 @@ class ClienteController extends Controller
     public function update(Request $request, Cliente $cliente)
     {
         //
+        $cliente->nome = $request->input('nome');
+        $cliente->documento = $request->input('documento');
+        $cliente->telefone = $request->input('telefone');
+        $cliente->email = $request->input('email');
+        $cliente->sexo = $request->input('sexo');
+        $cliente->estado_civil = $request->input('estado_civil');
+        $cliente->data_nasc = $request->input('data_nasc');
+        if (!$request->has('inadimplente'))
+            $cliente['inadimplente'] = 0;
+        else
+            $cliente['inadimplente'] = 1;
+        $cliente->save();
+        return redirect()->route('clientes.index');
+
     }
 
     /**
@@ -83,5 +103,7 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+        $cliente->delete();
+        return redirect()->route('clientes.index');
     }
 }

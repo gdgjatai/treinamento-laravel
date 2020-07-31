@@ -20,7 +20,14 @@
             <td>{{$cliente->nome}}</td>
             <td>{{$cliente->email}}</td>
             <td>{{$cliente->telefone}}</td>
-            <td>-</td>
+            <td>
+                <form action="{{route('clientes.destroy', $cliente)}}" method="post" style="display: inline">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Excluir" name="excluir" class="btn btn-danger">
+                </form>
+                <a href="{{route('clientes.edit', $cliente)}}" class="btn btn-success">Editar</a>
+            </td>
         </tr>
     @endforeach
     </tbody>

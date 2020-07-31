@@ -13,7 +13,7 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cliente', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->string('documento')->unique();
@@ -23,9 +23,6 @@ class CreateClientesTable extends Migration
             $table->date('data_nasc')->nullable();
             $table->char('sexo')->nullable();
             $table->enum('estado_civil', \App\Cliente::ESTADOS_CIVIS)->nullable();
-            $table->string('deficiencia_fisica')->nullable();
-            $table->string('fantasia')->nullable();
-            $table->string('pessoa');
             $table->timestamps();
         });
     }
@@ -37,6 +34,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cliente');
+        Schema::dropIfExists('clientes');
     }
 }
